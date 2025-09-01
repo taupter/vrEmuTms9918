@@ -18,11 +18,12 @@ if(MSVC)
   add_compile_options(/arch:AVX2 /Ox)
 else()
   add_compile_options(-Wall -Wextra -Wpedantic -Werror)
-  if (UNIX)
+  if (UNIX AND NOT CMAKE_CROSSCOMPILING AND NOT PICO_SDK_PATH)
     add_compile_options(-march=native)
   endif()
 endif()
 
 include(CTest)
+
 
 add_subdirectory(src)
